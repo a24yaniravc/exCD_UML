@@ -54,9 +54,8 @@ classDiagram
       + String Apellido1
       + String Apellido2
           
-      - cancel()
-      - inscribe()
-      - confirmInscription()
+      - cancel() : Boolean
+      - inscribe() : Boolean
     }
 
     class Publico {
@@ -69,7 +68,7 @@ classDiagram
 
     class Autor {
         + String Titulos
-        + String Premios
+        + List<String> Premios
     }
 
     class Corto {
@@ -85,6 +84,7 @@ classDiagram
 ## Código java de las clases
 ```java
 import java.util.Date;
+import java.util.List;
 
 public abstract class Conferencia {
     public String nombre;
@@ -146,14 +146,102 @@ public class Sesion {
 
 public class Participante {
     public String nombre;
-    public String Apellido1;
-    public String Apellido2;
-    private
+    public String apellido1;
+    public String apellido2;
+    private Boolean cancel_status;
+    private Boolean inscription_status;
 
-// SEGUIR!!!
+    public Participante(String nombre, String apellido1, String apellido2, Boolean cancel_status, Boolean inscription_status) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.cancel_status = cancel_status;
+        this.inscription_status = inscription_status;
+    }
 
-
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getApellido1() {
+        return apellido1;
+    }
+    public void setApellido1(String nombre) {
+        this.apellido1 = apellido1;
+    }
+    public String getApellido2() {
+        return apellido2;
+    }
+    public void setApellido2(String nombre) {
+        this.apellido2 = apellido2;
+    }
+    private Boolean getCancel_status(){
+        return cancel_status;
+    }
+    private void setCancel_status(Boolean cancel_status){
+        this.cancel_status = cancel_status;
+    }
+    private Boolean getInscription_status(){
+        return inscription_status;
+    }
+    private void setInscription_status(Boolean inscription_status){
+        this.inscription_status = inscription_status;
+    }
 }
+
+public class Publico extends Participante {
+    public String tipo_Entrada;
+
+    public Publico(String tipo_Entrada, String nombre, String apellido1, String apellido2, Boolean cancel_status, Boolean inscription_status){
+        super(nombre, apellido1, apellido2, cancel_status, inscription_status);
+        this.tipo_Entrada = tipo_Entrada;
+    }
+
+    public String getTipo_Entrada() {
+        return tipo_Entrada;
+    }
+    public void setTipo_Entrada(String tipo_Entrada) {
+        this.tipo_Entrada = tipo_Entrada;
+    }
+}
+
+public class Orador extends Participante {
+    public String sala;
+
+    public Orador(String tipo_Entrada, String nombre, String apellido1, String apellido2, Boolean cancel_status, Boolean inscription_status){
+        super(nombre, apellido1, apellido2, cancel_status, inscription_status);
+        this.sala = tipo_Entrada;
+    }
+
+    public String getSala(){
+        return sala;
+    }
+    public void setSala(){
+        this.sala = sala;
+    }
+}
+
+public class Autor(){
+    String titulos;
+    List<String> premios;
+
+    public String getTitulos(){
+        return titulos;
+    }
+    public void setTitulos(String titulos){
+        this.titulos = titulos;
+    }
+    public List<String> getPremios(){
+        return premios;
+    }
+    public void setPremios(List<String> premios){
+        this.premios = premios;
+    }
+}
+
+
 
 public class Artigo_Cientifico {
     String nombre;
@@ -197,6 +285,44 @@ public class Artigo_Cientifico {
     }
     public void setConclusion(){
         this.conclusion = conclusion;
+    }
+}
+
+public class ArtigoCientifico_Corto extends Artigo_Cientifico {
+    int num_palabras;
+
+    public ArtigoCientifico_Corto(int num_palabras, String nombre, String tema, String afiliacion, Date fecha_Publicacion, String conclusion) {
+        super(nombre, tema, afiliacion, fecha_Publicacion, conclusion);
+        this.num_palabras = num_palabras;
+    }
+    public int getNum_palabras(){
+        return num_palabras;
+    }
+    public void setNum_palabras(int num_palabras){
+        this.num_palabras = num_palabras;
+    }
+}
+
+public class ArtigoCientifico_Largo extends Artigo_Cientifico {
+    String resumen;
+    int num_paginas;
+
+    public ArtigoCientifico_Largo(String resumen, int num_paginas, String nombre, String tema, String afiliacion, Date fecha_Publicacion, String conclusion) {
+        super(nombre, tema, afiliacion, fecha_Publicacion, conclusion);
+        this.resumen = resumen;
+        this.num_paginas = num_paginas;
+    }
+    public String getResumen(){
+        return resumen;
+    }
+    public void setResumen(String resumen){
+        this.resumen = resumen;
+    }
+    public int getNum_paginas(){
+        return num_paginas;
+    }
+    public void setNum_paginas(int num_paginas){
+        this.num_paginas = num_paginas;
     }
 }
 ```
