@@ -68,7 +68,7 @@ classDiagram
 
     class Autor {
         + String Titulos
-        + List<String> Premios
+        + List Premios
     }
 
     class Corto {
