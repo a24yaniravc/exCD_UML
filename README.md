@@ -241,8 +241,6 @@ public class Autor(){
     }
 }
 
-
-
 public class Artigo_Cientifico {
     String nombre;
     String tema;
